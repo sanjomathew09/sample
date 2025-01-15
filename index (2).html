@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An interactive and professional showcase of essential Linux commands for user and group management.">
+    <meta name="author" content="Sanjo Mathew">
+    <title>Professional Linux Commands Showcase</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eef2f5;
+            color: #2c3e50;
+            border: 5px solid #bdc3c7;
+        }
+
+        header {
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border-bottom: 3px solid #bdc3c7;
+        }
+
+        nav {
+            background-color: #2c3e50;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid #bdc3c7;
+        }
+
+        nav a {
+            color: #ecf0f1;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #1abc9c;
+        }
+
+        section {
+            padding: 40px;
+            border-bottom: 1px solid #ddd;
+            border: 2px solid #bdc3c7;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #2980b9;
+        }
+
+        .command-example {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border: 1px solid #bdc3c7;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: monospace;
+            color: #34495e;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 15px;
+            border-radius: 5px;
+            border: 1px solid #bdc3c7;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #34495e;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 20px;
+            border-top: 3px solid #bdc3c7;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .dark-mode {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+        }
+        .dark-mode header, .dark-mode nav, .dark-mode footer {
+            background-color: #34495e;
+        }
+        .dark-mode .command-example {
+            background-color: #1e2c34;
+            border: 1px solid #7f8c8d;
+        }
+        .dark-mode nav a:hover {
+            background-color: #16a085;
+        }
+
+        #interactive input {
+            width: 60%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1rem;
+            border: 1px solid #bdc3c7;
+            border-radius: 5px;
+        }
+
+        #interactive button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #1abc9c;
+            color: #ecf0f1;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #interactive button:hover {
+            background-color: #16a085;
+        }
+
+        #outputArea {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin-top: 20px;
+            border: 1px solid #bdc3c7;
+        }
+
+        #commandHistory {
+            margin-top: 20px;
+        }
+
+        #commandHistory li {
+            padding: 5px 0;
+            font-family: monospace;
+            color: #34495e;
+        }
+
+        #definitions {
+            padding: 40px;
+            border-top: 1px solid #ddd;
+            border: 2px solid #bdc3c7;
+            border-radius: 10px;
+            margin-top: 30px;
+            background-color: #fff;
+        }
+
+        #definitions h3 {
+            color: #2980b9;
+        }
+
+        #definitions p {
+            color: #34495e;
+        }
+
+        .command-section {
+            margin-bottom: 30px;
+        }
+
+        .command-section h4 {
+            color: #2980b9;
+            text-transform: uppercase;
+        }
+
+        .command-section .usage, .command-section .example {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        /* Styling for usage section */
+        .command-section .usage {
+            background-color: #f4f7fb;
+            border: 2px solid #1abc9c;
+            color: #16a085;
+            font-family: monospace;
+            font-weight: bold;
+        }
+
+        /* Styling for example section */
+        .command-section .example {
+            background-color: #fef3e5;
+            border: 2px solid #f39c12;
+            color: #f39c12;
+            font-family: monospace;
+            font-style: italic;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Professional Showcase of Linux Commands</h1>
+        <p>Master the art of user and group management with these essential Linux commands.</p>
+    </header>
+
+    <nav>
+        <a href="#init">INIT</a>
+        <a href="#useradd">USERADD</a>
+        <a href="#usermod">USERMOD</a>
+        <a href="#userdel">USERDEL</a>
+        <a href="#groupadd">GROUPADD</a>
+        <a href="#groupmod">GROUPMOD</a>
+        <a href="#groupdel">GROUPDEL</a>
+        <a href="#passwd">PASSWD</a>
+        <a href="#sudo">SUDO</a>
+    </nav>
+
+    <section id="interactive">
+        <h2>Interactive Command Line Simulator</h2>
+        <div>
+            <input type="text" id="commandInput" placeholder="Enter Linux command..." />
+            <button onclick="simulateCommand()">Execute Command</button>
+        </div>
+
+        <h3>Command History:</h3>
+        <ul id="commandHistory"></ul>
+        
+        <pre id="outputArea"></pre>
+    </section>
+
+    <section id="definitions">
+        <h3>Command Definitions</h3>
+
+        <!-- Init Command Section -->
+        <div id="init" class="command-section">
+            <h4>INIT</h4>
+            <p>The 'init' command is used to initialize the system and manage run levels. It is responsible for starting system processes during boot-up.</p>
+            <div class="usage">
+                <strong>Usage:</strong>
+                <p>init [level]</p>
+            </div>
+            <div class="example">
+                <strong>Example:</strong>
+                <p>init 3 - Switches to multi-user mode without a graphical interface.</p>
+            </div>
+            <img src="init.jpg" alt="INIT command illustration">
+        </div>
+
+        <!-- useradd Command Section -->
+        <div id="useradd" class="command-section">
+            <h4>USERADD</h4>
+            <p>The 'useradd' command is used to create a new user on the system, allowing them to have login privileges and access to the system.</p>
+            <div class="usage">
+                <strong>Usage:</strong>
+                <p>useradd [options] username</p>
+            </div>
+            <div class="example">
+                <strong>Example:</strong>
+                <p>useradd -m john - Creates a new user 'john' with a home directory.</p>
+            </div>
+            <img src="use.jpg" alt="USERADD command illustration">
+        </div>
+
+        <!-- usermod Command Section -->
+        <div id="usermod" class="command-section">
+            <h4>USERMOD</h4>
+            <p>The 'usermod' command allows modification of user account details, such as username, home directory, and group memberships.</p>
+            <div class="usage">
+                <strong>Usage:</strong>
+                <p>usermod [options] username</p>
+            </div>
+            <div class="example">
+                <strong>Example:</strong>
+                <p>usermod -aG sudo john - Adds user 'john' to the 'sudo' group.</p>
+            </div>
+            <img src="usermod .jpg" alt="USERMOD command illustration">
+        </div>
+
+        <!-- userdel Command Section -->
+        <div id="userdel" class="command-section">
+            <h4>USERDEL</h4>
+            <p>The 'userdel' command removes a user from the system, optionally deleting their home directory as well.</p>
+            <div class="usage">
+                <strong>Usage:</strong>
+                <p>userdel [options] username</p>
+            </div>
+            <div class="example">
+                <strong>Example:</strong>
+                <p>userdel -r john - Deletes user 'john' along with their home directory.</p>
+            </div>
+            <img src="user.jpg" alt="Illustration of the USERDEL command, showcasing its functionality for deleting user accounts safely and effectively.">
+        </div>
+
+        <!-- groupadd Command Section -->
+        <div id="groupadd" class="command-section">
+            <h4>GROUPADD</h4>
+            <p>The 'groupadd' command creates a new group on the system.</p>
+            <div class="usage">
+                <strong>Usage:</strong>
+                <p>groupadd groupname</p>
+            </div>
+            <div class="example">
+                <strong>Example:</strong>
+                <p>groupadd developers - Creates a new group called 'developers'.</p>
+            </div>
+            <img src="groupadd .jpg" alt="GROUPADD command illustration">
+        </div>
+
+        <!-- groupmod Command Section -->
+        <div id="groupmod" class="command-section">
+            <h4>GROUPMOD</h4>
+            <p>The 'groupmod' command allows modifications to an existing group, such as changing its name or GID.</p>
+            <div class="usage">
+                <strong>Usage:</strong>
+                <p>groupmod [options] groupname</p>
+            </div>
+            <div class="example">
+                <strong>Example:</strong>
+                <p>groupmod -n newgroup developers - Renames the 'developers' group to 'newgroup'.</p>
+            </div>
+            <img src="groupmod.jpg" alt="GROUPMOD command illustration">
+        </div>
+
+        <!-- groupdel Command Section -->
+        <div id="groupdel" class="command-section">
+            <h4>GROUPDEL</h4>
+            <p>The 'groupdel' command deletes a group from the system.</p>
+            <div class="usage">
+                <strong>Usage:</strong>
+                <p>groupdel groupname</p>
+            </div>
+            <div class="example">
+                <strong>Example:</strong>
+                <p>groupdel developers - Deletes the 'developers' group from the system.</p>
+            </div>
+            <img src="groupdel .jpg" alt="GROUPDEL command illustration">
+        </div>
+
+        <!-- passwd Command Section -->
+        <div id="passwd" class="command-section">
+            <h4>PASSWD</h4>
+            <p>The 'passwd' command allows the system administrator or a user to change their password.</p>
+            <div class="usage">
+                <strong>Usage:</strong>
+                <p>passwd [options] username</p>
+            </div>
+            <div class="example">
+                <strong>Example:</strong>
+                <p>passwd john - Changes the password for the user 'john'.</p>
+            </div>
+            <img src="passwd .jpg" alt="PASSWD command illustration">
+        </div>
+
+        <!-- sudo Command Section -->
+        <div id="sudo" class="command-section">
+            <h4>SUDO</h4>
+            <p>The 'sudo' command grants administrative privileges to users, allowing them to execute commands with superuser rights.</p>
+            <div class="usage">
+                <strong>Usage:</strong>
+                <p>sudo command</p>
+            </div>
+            <div class="example">
+                <strong>Example:</strong>
+                <p>sudo apt update - Runs the 'apt update' command with administrative privileges.</p>
+            </div>
+        </div>
+        <img src="sudo .jpg" alt="SUDO command illustration">
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sanjo Mathew | All rights reserved</p>
+    </footer>
+</body>
+</html>
